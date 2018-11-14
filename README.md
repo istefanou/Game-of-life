@@ -8,7 +8,7 @@ Simulation class creates a GUI which creates a world which consists of grasspane
 
 ![](simulation.png)
 
-On each round (Button press that is on GUI class) animals move, eat, and reproduce (after some turns).
+On each round (Button press that is on GUI class) animals move, eat, and reproduce(not every turn so that the population can decrease).
 
 ![](stats.png)
 
