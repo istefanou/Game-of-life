@@ -1,5 +1,9 @@
 # Game of Life
 
+To open and edit the project on your machine you can simply download IntelliJ IDEA https://www.jetbrains.com/idea/download/#section=windows
+
+and then select open project choosing the Game-of-life-master root folder
+
 First the user enters the dimension of the simulation world.
 
 ![](dimensions.png)
