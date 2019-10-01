@@ -6,18 +6,18 @@ public abstract class Carnivore extends Animal {
     public Carnivore(int x, int y, int velocity, int stamina, int rep, World w) {
         super(x, y, velocity, stamina, rep, w);
         w.location[x][y].carn.add(this);
-        w.carnileft++;//kratame ton arithmo carnileft gia na kseroumai pote prepei na teliwsei to simulation
+        w.carnileft++;//Keep track of carnivores left to end simulation if value is 0
     }
 
     @Override
     public void move() {
         {
             Random rand = new Random();
-            int x = rand.nextInt(velocity * 2) - velocity;
-            int y = rand.nextInt(velocity * 2) - velocity;//suntetegmenes gia na kinithei tuxai to zwo
+            int x = rand.nextInt(velocity * 2) - velocity;//Random movement of animal
+            int y = rand.nextInt(velocity * 2) - velocity;
             while(true)
                 try {
-                    w.location[this.x + x][this.y + y].carn.add(this);//prosthetei sthn lista tou koutou to zwo auto,o logos pou grapsame 2 move htan gia na kseroume ksexwrista poia carnivore kai pia herbivore vriskontai sto kouti
+                    w.location[this.x + x][this.y + y].carn.add(this);//Save it to blocks carnivores
                     w.location[this.x][this.y].carn.remove(this);
                     this.x+=x;
                     this.y+=y;
@@ -31,23 +31,24 @@ public abstract class Carnivore extends Animal {
 
     @Override
     void eat() {
-        Animal a = search();//psaxnei gia herbivore konta tou
+        Animal a = search();//Search for herbivore near it
                 if (a!=null) {
-                    a.death();//an vrei tote kalei methodo oti pethane to herbivore
-                    stamina = maxstamina;//gemizei to stamina
+                    a.death();//Mark animal found as dead
+                    stamina = maxstamina;//Fill stamina
                     if (GUI.MoreInfo) System.out.println("a " + getClass().getSimpleName() + " ate");
-                    kill(a);//enhmeronoumai ta zwa pou exoun fagothei
+                    kill(a);//Count kill statistics
                 }
                 else{
-                    stamina-=1;//alliws meiwnetai to stamina
-                    starvation();}//elenxei an exei ginei 0 ktlp
+                    stamina-=1;
+                    starvation();//Check if animal will starve
+                }
     }
-   private Animal search() {//anazhthsei sta geitonika koutia
+   private Animal search() {
        for (int i = x - 1; i <= x + 1; i++) {
            for (int k = y - 1; k <= y + 1; k++) {
                try{
                 if (!w.location[i][k].herb.isEmpty())
-                    return w.location[i][k].herb.get(0);}//an to vrei epistrefei thn topothesia
+                    return w.location[i][k].herb.get(0);}
                catch(ArrayIndexOutOfBoundsException e) {
                     ;
                     }
@@ -56,7 +57,7 @@ public abstract class Carnivore extends Animal {
        return null;
    }
 
-    public void death(){//otan pethenei prepei na afaireitai apo tis listes
+    public void death(){
         w.animals.remove(this);
         w.location[x][y].carn.remove(this);
         dead=true;

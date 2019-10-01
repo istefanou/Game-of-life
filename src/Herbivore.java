@@ -29,9 +29,9 @@ public abstract class Herbivore extends Animal{
     }
 
     @Override
-    void eat() {//opws sthn Carnivore alla psaxnei gia grass sto koutaki pou einai
+    void eat() {//Search for grass in block
         if (w.location[x][y].hasgrass) {
-            w.location[x][y].eaten();//diagrafei to grassidi(to kanei na exei fagwthei)
+            w.location[x][y].eaten();
             stamina = maxstamina;
             w.plantsleft-=1;
            if(GUI.MoreInfo) System.out.println("a " + getClass().getSimpleName() + " ate");

@@ -33,8 +33,8 @@ public abstract class Animal
     {
         if (GUI.MoreInfo) System.out.println("a " + getClass().getSimpleName() + " didnt eat");
 
-        if (stamina==0) {//ean to stamina tou zwou mhdenistei
-            death();//to zwo pethenei
+        if (stamina==0) {
+            death();
             for( Statistics s : w.stat)
             if(this.getClass()==s.myClass){
                 s.starved++;
@@ -48,7 +48,7 @@ public abstract class Animal
         }
     }
 
-    public void kill(Animal a){//xrhshmopoieitai gia na enhmeronontai oi plhrofories
+    public void kill(Animal a){
 
         for( Statistics s : w.stat)
             if(a.getClass()==s.myClass){

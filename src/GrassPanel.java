@@ -4,32 +4,32 @@ import java.util.LinkedList;
 
 
 public class GrassPanel extends JPanel {
-    public boolean hasgrass=true;//arxika exoun ola ta kouta grasidi
-    public  LinkedList<Herbivore> herb = new LinkedList<>();//lista me herbivore  gia to kouti
+    public boolean hasgrass=true;//Default value true, all panels start with grass
+    public  LinkedList<Herbivore> herb = new LinkedList<>();//Herbivores in that block
     public  LinkedList<Carnivore> carn = new LinkedList<>();
-    private JLabel jl1 = new JLabel("");
+    private JLabel jlabel_placeholder = new JLabel("");
     public GrassPanel(){
-        add(jl1);
-        jl1.setVisible(true);
+        add(jlabel_placeholder);
+        jlabel_placeholder.setVisible(true);
 
     }
 
     @Override
-    public void paint(Graphics g) {//kaleitai otan ginoun visible
+    public void paint(Graphics g) {//When the panels become visible
         super.paint(g);
         String temp="";
-        if ( hasgrass)//an exei grass prassino
+        if (hasgrass)
         {
             setBackground(Color.GREEN);
         }
         else setBackground(Color.lightGray);
 
-        for(Animal a:carn)//gia na emfanizei pia zwa exei to kouti
+        for(Animal a:carn)//Print Letters of animals in the panel
             temp=temp+a.shortname+" ";
         for(Animal a:herb)
             temp=temp+a.shortname+" ";
-        jl1.setText(temp);
-        jl1.validate();//enhmerwsh  tis plhrofories tou koutiou
+        jlabel_placeholder.setText(temp);
+        jlabel_placeholder.validate();//Update panel information
     }
 
     public void eaten(){
